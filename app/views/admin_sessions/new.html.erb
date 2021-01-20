@@ -1,0 +1,10 @@
+<div class="admin_login">
+  <%= form_tag '/admin_login' do%>
+      <text>Gebruikersnaam:</text>
+      <%= text_field_tag :username%>
+      <text>Wachtwoord:</text>
+      <%= password_field_tag :password%>
+
+      <%= submit_tag "Inloggen" %>
+  <%end%>
+</div>

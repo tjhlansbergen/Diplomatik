@@ -1,0 +1,8 @@
+<h1>Maak nieuwe beheerder aan:</h1>
+<%= form_for @admin_user do |f|%>
+  <%= f.label :username%><br>
+  <%= f.text_field :username%><br>
+  <%= f.label :password%><br>
+  <%= f.password_field :password%><br>
+  <%= f.submit %>
+<%end%>
