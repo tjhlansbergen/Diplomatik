@@ -15,12 +15,9 @@ class AdminSessionsController < AdminController
     end
  end
 
-  def admin_login
-  end
-
   def admin_logout
     session[:admin_user_id] = nil
-    redirect_to '/welcome'
+    redirect_to '/admin_login'
   end
 
 end
