@@ -8,6 +8,6 @@ class AdminUsersController < AdminController
   def create
     @admin_user = AdminUser.create(params.require(:admin_user).permit(:username, :password))
     session[:admin_user_id] = @admin_user.id
-    redirect_to '/welcome'
+    redirect_to root_path
  end
 end
