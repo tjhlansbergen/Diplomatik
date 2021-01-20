@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Diplomatik</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <!-- navigatie -->
+    <div class="navigation">
+      <div class="logo">
+        <h1>Diplomatik</h1>
+        <% if admin_logged_in? %>
+        <text>Welkom, <%= current_admin_user.username %></text>
+        <%end%>
+      </div>
+      <div class="userbox">
+        <% if admin_logged_in? %>
+          <%= button_to "Uitloggen", '/admin_logout', method: :get%>
+        <%end%>
+      </div>
+    </div>
+
+    <!-- content -->
+    <%= yield %>
+
+  </body>
+</html>

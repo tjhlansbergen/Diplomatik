@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   get 'admin_login', to: 'admin_sessions#new'
   post 'admin_login', to: 'admin_sessions#create'
   get 'admin_logout', to: 'admin_sessions#admin_logout'
+
+  root 'admin_sessions#new'
 end
