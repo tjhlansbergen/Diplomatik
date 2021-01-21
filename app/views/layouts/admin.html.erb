@@ -13,24 +13,25 @@
   <body>
 
     <!-- navigatie -->
-    <div class="navigation">
-      <div class="logo">
-        <h1>Diplomatik</h1>
-        <% if admin_logged_in? %>
-        <text>Ingelogd als: <%= current_admin_user.username %></text>
-        <%end%>
-      </div>
-      <div class="userbox">
-        <% if admin_logged_in? %>
-          <%= button_to "Uitloggen", '/admin_logout', method: :get%>
-        <%end%>
-      </div>
+    <div class="logo">
+      <h2>Diplomatik</h2>
     </div>
+    <% if admin_logged_in? %>
+      <div class="navigation">
+        <span>Ingelogd als: <%= current_admin_user.username %></span>
+        <span>&nbsp;&bull;</span>
+        <%= link_to "Uitloggen", '/admin_logout', method: :get%>
+        <%= link_to "Overzicht", '/overview', method: :get%>
+        <%= link_to "Klantbeheer", '/overview', method: :get%>
+        <%= link_to "Beheerderaccounts", '/overview', method: :get%>
+        <%= link_to "Log", '/log', method: :get%>
+      </div>
+    <%end%>
 
     <!-- pagina inhoud -->
     <div class="content">
       <%= yield %>
     </div>
-    
+
   </body>
 </html>

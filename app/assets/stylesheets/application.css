@@ -19,6 +19,17 @@ body {
     font-size: large;
 }
 
+a {
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    padding: 4px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 input[type=text], input[type=password], select {
     width: 100%;
     padding: 12px 20px;
@@ -31,7 +42,7 @@ input[type=text], input[type=password], select {
   
 input[type=submit] {
     width: 100%;
-    background-color: #4CAF50;
+    background-color: #c09f80;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -42,35 +53,33 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    background-color: #45a049;
+    background-color: #565656;
 }
 
 .content {
-    padding: 20px;
+    padding: 10px;
     width: 100%;   
 }
 
-.navigation {
-    background-color: #003399;
-    color: #f5f5f5;
-    display: inline-block;
-    width: 100%;
-}
-
 .logo {
-    float: left;
-    padding: 20px;
+    background-color: #76323f;
+    color: white;
+    width: 100%;
     font-family: "Lucida Console", "Courier New", monospace;
 }
 
-.logo h1 {
-    margin-top: 2px;
-    margin-bottom: 2px;
+.logo h2 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    margin: 0px;
 }
 
-.userbox {
-    float: right;
-    padding: 20px;
+.navigation {
+    padding-left: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;;
+    background-color: #d7cec7;
 }
 
 .admin_login {
