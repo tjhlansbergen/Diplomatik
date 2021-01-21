@@ -16,7 +16,6 @@
 
 body {
     margin: 0 auto;
-    font-size: large;
 }
 
 a {
@@ -56,9 +55,30 @@ input[type=submit]:hover {
     background-color: #565656;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+tr:nth-child(even){background-color: #f2f2f2;}
+  
+tr:hover {background-color: #ddd;}
+  
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #656565;
+    color: white;
+  }
+
 .content {
-    padding: 10px;
-    width: 100%;   
+    margin: 10px;   
 }
 
 .logo {
@@ -89,3 +109,4 @@ input[type=submit]:hover {
     transform: translate(-50%, -50%);
     max-width: 500px;
 }
+
