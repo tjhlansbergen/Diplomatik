@@ -1,4 +1,3 @@
 class AdminUser < ApplicationRecord
-    # ten behoeve van wachtwoord encryptie met bcrypt
-    has_secure_password
+    has_secure_password     # ten behoeve van wachtwoord encryptie met bcrypt
 end

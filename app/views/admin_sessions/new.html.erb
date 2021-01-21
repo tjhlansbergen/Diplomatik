@@ -1,10 +1,15 @@
 <div class="admin_login">
   <%= form_tag '/admin_login' do%>
-      <text>Gebruikersnaam:</text>
+      <span>Gebruikersnaam:</span>
       <%= text_field_tag :username%>
-      <text>Wachtwoord:</text>
+      <span>Wachtwoord:</span>
       <%= password_field_tag :password%>
 
       <%= submit_tag "Inloggen" %>
   <%end%>
+  <div class="error">
+  <% flash.each do |name, msg| -%>
+    <%= content_tag :div, msg, class: name %>
+  <% end -%>
+  </div>
 </div>

@@ -1,8 +1,8 @@
 class AdminSessionsController < AdminController
-  skip_before_action :authorized, only: [:new, :create, :welcome]
+  skip_before_action :authorized, only: [:new, :create]
 
   def new
-    # verwijst naar admin_sessions/new.html.erb
+    # toont admin_sessions/new.html.erb
   end
 
   def create
@@ -11,7 +11,8 @@ class AdminSessionsController < AdminController
        session[:admin_user_id] = @admin_user.id
        redirect_to root_path
     else
-       redirect_to '/admin_login'
+        flash.now[:error] = "Foutieve gebruikersnaam of wachtwoord" 
+        render :new
     end
  end
 
