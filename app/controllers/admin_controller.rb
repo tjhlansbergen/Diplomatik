@@ -14,4 +14,8 @@ class AdminController < ActionController::Base
     def authorized
         redirect_to '/admin_login' unless admin_logged_in?
     end
+
+    def overview
+        # toont views/admin/overview.erb
+    end
 end
