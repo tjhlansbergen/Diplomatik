@@ -14,3 +14,14 @@
     <td>0</td>
 </tr>
 </table>
+
+<h2>Logboek</h2>
+<ul>
+  <% @log_entries.each do |entry| %>
+    <li>
+      <%= entry.created_at %> :: 
+      <%= entry.severity %> :: 
+      <%= entry.message %>
+    </li>
+  <% end %>
+</ul>
