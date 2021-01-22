@@ -1,0 +1,28 @@
+<h2>Beheeraccounts</h2>
+
+<table>
+    <tr>
+        <th>Accountnaam</th>
+        <th>Gemaakt op</th>
+        <th>Laatst gewijzigd</th>
+        <th>Actie</th>
+    </tr>
+
+    <!-- toon het ingelogde account bovenaan -->
+    <tr>
+        <td><%= current_admin_user.username %></td>
+        <td><%= current_admin_user.created_at %></td>
+        <td><%= current_admin_user.updated_at %></td>
+        <td>Wijzig wachtwoord</td>
+    </tr>
+    
+    <!-- toon de rest van de accounts -->
+    <% @admin_accounts.select{ |account|  account.id != current_admin_user.id }.each do |account| %>
+        <tr>
+            <td><%= account.username %></td>
+            <td><%= account.created_at %></td>
+            <td><%= account.updated_at %></td>
+            <td>Verwijder account</td>
+        </tr>
+    <% end %>
+</table>

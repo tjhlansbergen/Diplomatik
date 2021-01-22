@@ -20,11 +20,12 @@
       <div class="navigation">
         <span>Ingelogd als: <%= current_admin_user.username %></span>
         <span>&nbsp;&bull;</span>
-        <%= link_to "Uitloggen", '/admin_logout', method: :get%>
         <%= link_to "Overzicht", '/overview', method: :get%>
         <%= link_to "Klantbeheer", '/overview', method: :get%>
-        <%= link_to "Accountbeheer", '/overview', method: :get%>
+        <%= link_to "Beheeraccounts", '/accounts', method: :get%>
+        <%= link_to "Uitloggen", '/admin_logout', method: :get%>
       </div>
+      <br />
     <%end%>
 
     <!-- pagina inhoud -->

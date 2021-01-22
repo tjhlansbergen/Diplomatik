@@ -20,4 +20,9 @@ class AdminController < ActionController::Base
         @admins = AdminUser.count
         @log_entries = LogEntry.all
     end
+
+    def accounts
+        # toont views/admin/accounts.html.erb
+        @admin_accounts = AdminUser.all
+    end
 end
