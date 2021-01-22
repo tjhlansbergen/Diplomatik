@@ -17,6 +17,7 @@ class AdminController < ActionController::Base
 
     def overview
         # toont views/admin/overview.erb
+        @admins = AdminUser.count
         @log_entries = LogEntry.all
     end
 end

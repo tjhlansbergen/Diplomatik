@@ -13,6 +13,18 @@
     <td>Studenten</td>
     <td>0</td>
 </tr>
+<tr>
+    <td>&nbsp</td>
+    <td>&nbsp</td>
+</tr>
+<tr>
+    <td>Beheeraccounts</td>
+    <td><%= @admins %></td>
+</tr>
+<tr>
+    <td>Logregels</td>
+    <td><%= @log_entries.count %>/<%= Rails.configuration.max_log_entries %></td>
+</tr>
 </table>
 
 <h2>Logboek</h2>
