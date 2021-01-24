@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :admin_users , only: [:new, :create, :destroy]
+  resources :admin_users
   
   get 'admin_login', to: 'admin_sessions#new'
   post 'admin_login', to: 'admin_sessions#create'

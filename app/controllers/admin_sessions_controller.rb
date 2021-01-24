@@ -10,7 +10,7 @@ class AdminSessionsController < AdminController
     @admin_user = AdminUser.find_by(username: params[:username])
     if @admin_user && @admin_user.authenticate(params[:password])
       session[:admin_user_id] = @admin_user.id
-      log LogEntry::INFORMATIONAL, "Beheerder #{@admin_user.username} logt in"
+      log LogEntry::INFORMATIONAL, "Beheerder #{@admin_user.username} is ingelogd"
       redirect_to root_path
     else
         flash.now[:error] = "Foutieve gebruikersnaam of wachtwoord" 

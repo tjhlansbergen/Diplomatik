@@ -1,0 +1,21 @@
+<h2>Wijzig wachtwoord beheeraccount <%= @admin_user.username %></h2>
+
+<div class="form">
+    <%= form_with model: @admin_user do |form| %>
+    <div>
+        <span>Huidig wachtwoord:</span>
+        <%= form.password_field :current_password %>
+        <span>Nieuw wachtwoord:</span>
+        <%= form.password_field :password %>
+        <span>Bevestig wachtwoord:</span>
+        <%= form.password_field :password_confirmation %>
+    </div>
+
+    <div>
+        <%= form.submit "Wijzig" %>
+    </div>
+    <div class="error">
+        <%= @admin_user.errors.full_messages().first %>
+    </div>
+    <% end %>
+</div>

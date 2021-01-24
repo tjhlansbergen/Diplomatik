@@ -103,12 +103,13 @@ th {
     background-color: #d7cec7;
 }
 
-.admin_login {
+.form {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 500px;
+    min-width: 320px;
+    max-width: 320px;
 }
 
 .error {
