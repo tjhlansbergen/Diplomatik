@@ -1,19 +1,10 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
+/* application.css - 2020/01/25 Tako Lansbergen
+ * 
+ * Stylesheet voor de Admin webinterface van de Diplomatik web-api 
  */
 
+
+ /* ELEMENTEN */
 body {
     margin: 0 auto;
 }
@@ -37,7 +28,7 @@ input[type=text], input[type=password], select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-  }
+}
   
 input[type=submit] {
     width: 100%;
@@ -65,11 +56,15 @@ table {
 td, th {
     border: 1px solid #ddd;
     padding: 8px;
-  }
+}
   
-tr:nth-child(even){background-color: #f2f2f2;}
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
   
-tr:hover {background-color: #ddd;}
+tr:hover {
+    background-color: #ddd;
+}
   
 th {
     padding-top: 12px;
@@ -77,7 +72,10 @@ th {
     text-align: left;
     background-color: #656565;
     color: white;
-  }
+}
+
+
+/* KLASSEN */
 
 .content {
     margin: 10px;   
@@ -117,3 +115,6 @@ th {
     color: red;
     text-align: center;
 }
+
+
+/* IDs */

@@ -1,4 +1,7 @@
-# Helper voor het schrijven van logregels naar de database
+# log_helper.rb - Tako Lansbergen 2020/01/25
+# 
+# Helper module voor het schrijven van logregels naar de database
+
 module LogHelper
 
     # schrijft 1 logentry, met de opgegeven severity en message
