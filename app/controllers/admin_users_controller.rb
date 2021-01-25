@@ -2,15 +2,23 @@ class AdminUsersController < AdminController
   include LogHelper
   skip_before_action :authorized, only: [:new, :create]
 
+  def index
+        # toont views/admin/index.html.erb
+        @admin_users = AdminUser.all
+  end
+
   def new
     @admin_user = AdminUser.new
   end
 
   def create
-    @admin_user = AdminUser.create(params.require(:admin_user).permit(:username, :password))
-    log LogEntry::INFORMATIONAL, "Beheeracount #{@admin_user.username} is aangemaakt"
-    session[:admin_user_id] = @admin_user.id
-    redirect_to root_path
+    result = @admin_user = AdminUser.create(admin_user_params)
+    if result.persisted?
+      log LogEntry::INFORMATIONAL, "Beheeracount #{@admin_user.username} is aangemaakt door #{current_admin_user.username}"
+      redirect_to admin_users_path
+    else
+      render :new
+    end
   end
 
   def edit
@@ -22,7 +30,7 @@ class AdminUsersController < AdminController
 
     if @admin_user.update(admin_user_params)
       log LogEntry::INFORMATIONAL, "Beheeracount #{@admin_user.username} heeft wachtwoord gewijzigd"
-      redirect_to '/accounts'
+      redirect_to admin_users_path
     else
       render :edit
     end
@@ -31,18 +39,13 @@ class AdminUsersController < AdminController
   def destroy
     @admin_user = AdminUser.find(params[:id])
     @admin_user.destroy
-    log LogEntry::INFORMATIONAL, "Beheeracount #{@admin_user.username} is verwijderd"
-    redirect_to '/accounts'
-  end
-
-  def show
-    # toont views/admin/show.html.erb
-    @admin_users = AdminUser.all
+    log LogEntry::INFORMATIONAL, "Beheeracount #{@admin_user.username} is verwijderd door #{current_admin_user.username}"
+    redirect_to admin_users_path
   end
 
   private
     def admin_user_params
-      params.require(:admin_user).permit(:current_password, :password, :password_confirmation)
+      params.require(:admin_user).permit(:username, :current_password, :password, :password_confirmation)
     end
 
 end

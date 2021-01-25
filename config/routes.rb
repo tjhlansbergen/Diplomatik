@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   get 'admin_logout', to: 'admin_sessions#admin_logout'
   
   get 'overview', to: 'admin#overview'
-  get 'accounts', to: 'admin_users#show'
 
   root 'admin#overview'
 end

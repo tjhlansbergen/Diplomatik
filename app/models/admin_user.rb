@@ -1,10 +1,12 @@
 class AdminUser < ApplicationRecord
     
+    # Valideer dat gebruikersnaam is ingevuld
     # Wachtwoord policy, minimaal 8 tekens
     # laat gebruikers het nieuwe wahtwoord tweemaal opgeven
     # valideer het huidige wachtwoord nogmaals bij wijzigen wachtwoord
     # valideer dat het nieuwe wacht anders is dan het huidige
-    validates :password, presence: true, length: { minimum: 8, :message => "Wachtwoord is te kort (gebruik minimaal 8 tekens)" }
+    validates :username, presence: { message: "Geef een geldige gebruikersnaam op" }
+    validates :password, presence: { message: "Geef een geldig wachtwoord op" }, length: { minimum: 8, :message => "Wachtwoord is te kort (gebruik minimaal 8 tekens)" }
     validates_confirmation_of :password, :message => "De opgegeven wachtwoorden komen niet overeen"
     validate :current_password_is_correct, on: :update
     validate :new_password_is_different, on: :update

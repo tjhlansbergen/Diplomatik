@@ -16,7 +16,7 @@ class AdminController < ActionController::Base
     end
 
     def overview
-        # toont views/admin/overview.erb
+        # toont views/admin/overview.html.erb
         @admins = AdminUser.count
         @log_entries = LogEntry.all.order(created_at: :desc)
     end

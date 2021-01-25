@@ -1,8 +1,23 @@
-<h1>Maak nieuwe beheerder aan:</h1>
-<%= form_for @admin_user do |f|%>
-  <%= f.label :username%><br>
-  <%= f.text_field :username%><br>
-  <%= f.label :password%><br>
-  <%= f.password_field :password%><br>
-  <%= f.submit %>
-<%end%>
+<h2>Aanmaken beheeraccount</h2>
+
+<div class="form">
+  <%= form_with model: @admin_user do |form| %>
+    <div>
+      <span>Nieuwe gebruikernaam:</span>
+      <%= form.text_field :username%><br>
+
+      <span>Nieuw wachtwoord:</span>
+      <%= form.password_field :password %>
+
+      <span>Bevestig wachtwoord:</span>
+      <%= form.password_field :password_confirmation %>
+    </div>
+
+    <div>
+      <%= form.submit "Maak aan" %>
+    </div>
+        <div class="error">
+        <%= @admin_user.errors.full_messages().first %>
+    </div>
+  <%end%>
+</div>
