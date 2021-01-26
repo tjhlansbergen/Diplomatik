@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :customers
   resources :admin_users
   
   get 'admin_login', to: 'admin_sessions#new'
