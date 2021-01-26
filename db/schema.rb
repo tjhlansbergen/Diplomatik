@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_26_132924) do
+ActiveRecord::Schema.define(version: 2021_01_26_184509) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "api_users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.integer "customer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_api_users_on_customer_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -33,4 +42,5 @@ ActiveRecord::Schema.define(version: 2021_01_26_132924) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "api_users", "customers"
 end
