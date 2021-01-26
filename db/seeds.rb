@@ -11,3 +11,5 @@ admin_users = AdminUser.create([
     {username: "bart@novi.nl", password: "novi!0033"},
     {username: "coen@novi.nl", password: "novi!0033"},
     {username: "dirk@novi.nl", password: "novi!0033"}])
+
+customers = Customer.create(name: "Novi Hogeschool", deleted: false)

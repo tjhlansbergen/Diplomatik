@@ -21,7 +21,7 @@
         <span>Ingelogd als: <%= current_admin_user.username %></span>
         <span>&nbsp;&bull;</span>
         <%= link_to "Overzicht", '/overview', method: :get%>
-        <%= link_to "Klantbeheer", '/overview', method: :get%>
+        <%= link_to "Klantbeheer", customers_path, method: :get%>
         <%= link_to "Beheeraccounts", admin_users_path, method: :get%>
         <%= link_to "Uitloggen", '/admin_logout', method: :get%>
       </div>

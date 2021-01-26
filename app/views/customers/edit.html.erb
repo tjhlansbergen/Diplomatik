@@ -1,6 +1,21 @@
-<h1>Editing Customer</h1>
+<h2>Wijzig klantnaam</h2>
 
-<%= render 'form', customer: @customer %>
+<div class="form">
+    <%= form_with model: @customer do |form| %>
+    <div>
+        <span>Huidige klantnaam:</span>
+        <%= form.text_field :name, :readonly => true %>
+        
+        <span>Nieuwe klantnaam:</span>
+        <%= form.text_field :name, value: nil %>
+        
+    </div>
 
-<%= link_to 'Show', @customer %> |
-<%= link_to 'Back', customers_path %>
+    <div>
+        <%= form.submit "Wijzig" %>
+    </div>
+    <div class="error">
+        <%= @customer.errors.full_messages().first %>
+    </div>
+    <% end %>
+</div>

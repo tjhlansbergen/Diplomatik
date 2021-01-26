@@ -25,7 +25,8 @@ class AdminController < ActionController::Base
 
     # # toont views/admin/overview.html.erb en maakt de benodigde models beschikbaar voor de view
     def overview
-        @admins = AdminUser.count
+        @customer_count = Customer.count
+        @admin_count = AdminUser.count
         @log_entries = LogEntry.all.order(created_at: :desc)
     end
 
