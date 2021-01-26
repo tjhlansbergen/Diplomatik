@@ -38,6 +38,6 @@ class ApiUsersController < ApiController
 
     # gedeelde methode voor verifieren van invoer
     def api_user_params
-      params.permit(:username, :password, :costumer_id)
+      params.permit(:username, :password, :costumer_id, :can_add_users)
     end
 end
