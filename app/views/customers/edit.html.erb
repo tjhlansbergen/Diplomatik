@@ -1,14 +1,10 @@
-<h2>Wijzig klantnaam</h2>
+<h2>Wijzig klantnaam: <%= @customer.name %></h2>
 
 <div class="form">
     <%= form_with model: @customer do |form| %>
     <div>
-        <span>Huidige klantnaam:</span>
-        <%= form.text_field :name, :readonly => true %>
-        
         <span>Nieuwe klantnaam:</span>
-        <%= form.text_field :name, value: nil %>
-        
+        <%= form.text_field :name, value: nil %>    
     </div>
 
     <div>
