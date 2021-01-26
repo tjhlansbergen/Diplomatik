@@ -19,5 +19,6 @@ module Diplomatik
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.max_log_entries = 100
+    config.jwt_seed = "PeWKuQwMSEDLHnZt"
   end
 end
