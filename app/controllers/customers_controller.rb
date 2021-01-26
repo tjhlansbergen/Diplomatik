@@ -1,4 +1,5 @@
 class CustomersController < AdminController
+  include LogHelper   # ten behoeve van logging
 
   # GET /customers
   def index
@@ -21,6 +22,8 @@ class CustomersController < AdminController
     @customer.deleted = false   # nieuwe klanten expliciet op niet-verwijderd zetten
 
     if @customer.save
+      # aanmaken gelukt, schrijft logentry en toon overzicht
+      log LogEntry::INFORMATIONAL, "Klant #{@customer.name}, id #{@customer.id}, is aangemaakt door #{current_admin_user.username}"
       redirect_to customers_path
     else
       render :new
@@ -31,6 +34,8 @@ class CustomersController < AdminController
   def update
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
+      # wijzigem gelukt, schrijft logentry en toon overzicht
+      log LogEntry::INFORMATIONAL, "Klantnaam voor klant id #{@customer.id} is gewijzigd door #{current_admin_user.username}"
       redirect_to customers_path
     else
       render :edit
@@ -43,6 +48,7 @@ class CustomersController < AdminController
     # 'soft' delete de klant, (de namen van) historische klanten blijven behouden in de database
     @customer.deleted = true
     @customer.save
+    log LogEntry::INFORMATIONAL, "Klant #{@customer.name}, id #{@customer.id}, is verwijderd door #{current_admin_user.username}"
     redirect_to customers_path
   end
 
