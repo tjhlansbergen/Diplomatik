@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :customers
   resources :admin_users
-  resource :api_users, only: [:create]
+  resources :api_users
   
   post "/api/login", to: "api_users#login"
   get "/api/auto_login", to: "api_users#auto_login"

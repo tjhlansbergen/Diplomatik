@@ -4,7 +4,13 @@
 # overerft ApiController
 
 class ApiUsersController < ApiController
-    before_action :authorized, only: [:auto_login]
+    before_action :authorized, only: [:auto_login]  # create ook?
+    skip_before_action :verify_authenticity_token   # voor api calls
+
+      # toont views/customers/index.html.erb en laadt het benodigde model voor de view
+    def index
+      @api_users = ApiUser.all
+    end
 
     # voegt API gebruiker toe
     def create

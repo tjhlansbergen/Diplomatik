@@ -5,6 +5,7 @@
     <tr>
       <th>Nummer</th>
       <th>Naam</th>
+      <th>App gebruikers:</th>
       <th>&nbsp;</th>
       <th>&nbsp;</th>
     </tr>
@@ -15,6 +16,7 @@
     <tr>
       <td><%= customer.id %></td>
       <td><%= customer.name %></td>
+      <td><%= customer.api_users.count %></td>
       <td><%= link_to "Naam wijzigen", edit_customer_path(customer) %></td>
       <td><%= link_to "Verwijder klant", customer_path(customer), 
           method: :delete, 

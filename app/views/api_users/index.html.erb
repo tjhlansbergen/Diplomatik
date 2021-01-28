@@ -1,0 +1,25 @@
+<h2>App gebruikers</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Gebruikersaam</th>
+      <th>klantnummer</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+
+  <!-- toon de (niet verwijderde) aangesloten klanten -->
+  <% @api_users.each do |api_user| %>
+    <tr>
+      <td><%= api_user.username %></td>
+      <td><%= api_user.customer.id %></td>
+      <td><%= link_to "Verwijder gebruiker", api_user_path(api_user), 
+          method: :delete, 
+          data: { confirm: "Weet u zeker dat u gebruiker '#{api_user.username} ' wilt verwijderen?" } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<!-- toon link voor toevoegen klant -->
+&nbsp;<%= link_to "+ App gebruiker toevoegen", new_api_user_path %>

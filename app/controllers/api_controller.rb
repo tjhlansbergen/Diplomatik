@@ -1,9 +1,9 @@
 # api_controller.rb - Tako Lansbergen 2020/01/26
 # 
 # Main controller voor de API van de Diplomatik web-api 
-# overerft ActionContoller::API
+# overerft ActionContoller::Base
 
-class ApiController < ActionController::API
+class ApiController < AdminController
     before_action :authorized
 
     # versleutelt gebruikersgegevens als token voor toegang tot de API endpoints na inloggen
