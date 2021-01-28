@@ -4,7 +4,7 @@
 # overerft ActionContoller::Base, alle andere controllers overerven (indirect) van deze controller
 
 class ApplicationController < ActionController::Base
-    before_action :authorized
+    before_action :authorized               # vereist een ingelogde gebruiker voor alle pagina's
     helper_method :current_admin_user       # maakt de methode beschikbaar voor views
     helper_method :admin_logged_in?         # maakt de methode beschikbaar voor views
 

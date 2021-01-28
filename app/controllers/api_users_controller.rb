@@ -4,8 +4,8 @@
 # overerft ApiController
 
 class ApiUsersController < ApiController
-    before_action :authorized, only: [:auto_login]  # create ook?
-    skip_before_action :verify_authenticity_token   # voor api calls
+    skip_before_action :authorized, only: [:login]  # maakt inloggen beschikbaar voor niet ingelogde gebruikers
+    skip_before_action :verify_authenticity_token   # maakt inloggen beschikbaar voor niet ingelogde gebruikers
 
       # toont views/customers/index.html.erb en laadt het benodigde model voor de view
     def index

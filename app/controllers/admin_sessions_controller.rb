@@ -4,8 +4,8 @@
 # overerft AdminController
 
 class AdminSessionsController < AdminController
-  include LogHelper # ten behoeve van logging
-  skip_before_action :authorized, only: [:new, :create]   # maak inloggen beschikbaar (voor niet ingelogde beheerders)
+  include LogHelper                                       # ten behoeve van logging
+  skip_before_action :authorized, only: [:new, :create]   # maak inloggen beschikbaar voor niet ingelogde beheerders
 
   # toont admin_sessions/new.html.erb
   def new

@@ -4,7 +4,7 @@
 # overerft ApplicationController
 
 class ApiController < ApplicationController
-    before_action :authorized
+    before_action :authorized     # vereist ingelogde gebruiker voor alle Endpoints
 
     # versleutelt gebruikersgegevens als token voor toegang tot de API endpoints na inloggen
     def encode_token(payload)
