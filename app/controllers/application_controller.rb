@@ -1,9 +1,9 @@
-# admin_controller.rb - Tako Lansbergen 2020/01/25
+# application_controller.rb - Tako Lansbergen 2020/01/25
 # 
-# Main controller voor de Admin webinterface van de Diplomatik web-api 
-# overerft ActionContoller
+# Main controller voor de van de Diplomatik web-api 
+# overerft ActionContoller::Base, alle andere controllers overervan van deze controller
 
-class AdminController < ActionController::Base
+class ApplicationController < ActionController::Base
     before_action :authorized
     helper_method :current_admin_user
     helper_method :admin_logged_in?

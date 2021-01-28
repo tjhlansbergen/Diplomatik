@@ -1,9 +1,9 @@
 # admin_sessions_controller.rb - Tako Lansbergen 2020/01/25
 # 
 # Sessie controller voor de Admin webinterface van de Diplomatik web-api 
-# overerft AdminController
+# overerft ApplicationController
 
-class AdminSessionsController < AdminController
+class AdminSessionsController < ApplicationController
   include LogHelper # ten behoeve van logging
   skip_before_action :authorized, only: [:new, :create]   # maak inloggen beschikbaar (voor niet ingelogde beheerders)
 

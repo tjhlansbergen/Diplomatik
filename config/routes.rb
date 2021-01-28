@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post 'admin_login', to: 'admin_sessions#create'
   get 'admin_logout', to: 'admin_sessions#admin_logout'
   
-  get 'overview', to: 'admin#overview'
+  get 'overview', to: 'application#overview'
 
-  root 'admin#overview'
+  root 'application#overview'
 end
