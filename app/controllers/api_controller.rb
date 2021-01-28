@@ -3,7 +3,7 @@
 # Main controller voor de API van de Diplomatik web-api 
 # overerft van ActionContoller:API
 
-class ApiController < ActionContoller:API
+class ApiController < ActionController::API
     before_action :authorized     # vereist ingelogde gebruiker voor alle Endpoints
 
     # versleutelt gebruikersgegevens als token voor toegang tot de API endpoints na inloggen
