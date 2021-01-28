@@ -1,9 +1,9 @@
 # customer_controller.rb - Tako Lansbergen 2020/01/26
 # 
 # Controller voor klantbeheer voor de Admin webinterface van de Diplomatik web-api 
-# overerft ApplicationController
+# overerft AdminController
 
-class CustomersController < ApplicationController
+class CustomersController < AdminController
   include LogHelper   # ten behoeve van logging
 
   # toont views/customers/index.html.erb en laadt het benodigde model voor de view

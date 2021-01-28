@@ -1,9 +1,9 @@
 # admin_users_controller.rb - Tako Lansbergen 2020/01/25
 # 
 # Controller voor beheeraccount-beheer voor de Admin webinterface van de Diplomatik web-api 
-# overerft ApplicationController
+# overerft AdminController
 
-class AdminUsersController < ApplicationController
+class AdminUsersController < AdminController
   include LogHelper   # ten behoeve van logging
 
   # toont views/admin_users/index.html.erb en laadt het benodigde model voor de view
