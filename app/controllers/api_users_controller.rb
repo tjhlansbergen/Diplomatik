@@ -1,16 +1,10 @@
 # api_users_controller.rb - Tako Lansbergen 2020/01/26
 # 
-# Controller voor het beheer (aanmaken, verwijderen, inloggen) van API gebruikers van de Diplomatik web-api 
+# Controller voor het API endpoint voor API gebruikers van de Diplomatik web-api 
 # overerft ApiController
 
 class ApiUsersController < ApiController
     skip_before_action :authorized, only: [:login]  # maakt inloggen beschikbaar voor niet ingelogde gebruikers
-    skip_before_action :verify_authenticity_token   # maakt inloggen beschikbaar voor niet ingelogde gebruikers
-
-      # toont views/customers/index.html.erb en laadt het benodigde model voor de view
-    def index
-      @api_users = ApiUser.all
-    end
 
     # voegt API gebruiker toe
     def create

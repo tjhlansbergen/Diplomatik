@@ -1,7 +1,7 @@
 <h2>Aanmaken nieuwe klant</h2>
 
 <div class="form">
-  <%= form_with model: @customer do |form| %>
+  <%= form_with model: @customer, url: admin_customers_path do |form| %>
     <div>
       <span>Naam nieuwe klant:</span>
       <%= form.text_field :name%><br>

@@ -1,9 +1,9 @@
-# customer_controller.rb - Tako Lansbergen 2020/01/26
+# admin_customers_controller.rb - Tako Lansbergen 2020/01/26
 # 
 # Controller voor klantbeheer voor de Admin webinterface van de Diplomatik web-api 
 # overerft AdminController
 
-class CustomersController < AdminController
+class AdminCustomersController < AdminController
   include LogHelper   # ten behoeve van logging
 
   # toont views/customers/index.html.erb en laadt het benodigde model voor de view
@@ -29,7 +29,7 @@ class CustomersController < AdminController
     if @customer.save
       # aanmaken gelukt, schrijft logentry en toon overzicht
       log LogEntry::INFORMATIONAL, "Klant #{@customer.name}, id #{@customer.id}, is aangemaakt door #{current_admin_user.username}"
-      redirect_to customers_path
+      redirect_to admin_customers_path
     else
       # aanmaken niet gelukt, toon formulier opniew (met foutmelding
       render :new
@@ -42,7 +42,7 @@ class CustomersController < AdminController
     if @customer.update(customer_params)
       # wijzigen gelukt, schrijft logentry en toon overzicht
       log LogEntry::INFORMATIONAL, "Klantnaam voor klant id #{@customer.id} is gewijzigd door #{current_admin_user.username}"
-      redirect_to customers_path
+      redirect_to admin_customers_path
     else
       # wijzigen niet gelukt, toon formulier opnieuw (met foutmelding)
       render :edit
@@ -56,7 +56,7 @@ class CustomersController < AdminController
     @customer.deleted = true
     @customer.save
     log LogEntry::INFORMATIONAL, "Klant #{@customer.name}, id #{@customer.id}, is verwijderd door #{current_admin_user.username}"
-    redirect_to customers_path
+    redirect_to admin_customers_path
   end
 
   # gedeelde methode voor verifieren van invoer

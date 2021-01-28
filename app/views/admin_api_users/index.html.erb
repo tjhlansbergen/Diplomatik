@@ -14,7 +14,7 @@
     <tr>
       <td><%= api_user.username %></td>
       <td><%= api_user.customer.id %></td>
-      <td><%= link_to "Verwijder gebruiker", api_user_path(api_user), 
+      <td><%= link_to "Verwijder gebruiker", admin_api_user_path(api_user), 
           method: :delete, 
           data: { confirm: "Weet u zeker dat u gebruiker '#{api_user.username} ' wilt verwijderen?" } %></td>
     </tr>
@@ -22,4 +22,4 @@
 </table>
 
 <!-- toon link voor toevoegen klant -->
-&nbsp;<%= link_to "+ App gebruiker toevoegen", new_api_user_path %>
+&nbsp;<%= link_to "+ App gebruiker toevoegen", new_admin_api_user_path %>

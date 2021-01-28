@@ -1,0 +1,17 @@
+<h2>Aanmaken nieuwe App gebruiker</h2>
+
+<div class="form">
+  <%= form_with model: @api_user, url: admin_api_users_path do |form| %>
+    <div>
+      <span>Nieuwe gebruikersaam:</span>
+      <%= form.text_field :username%><br>
+    </div>
+
+    <div>
+      <%= form.submit "Maak aan" %>
+    </div>
+        <div class="error">
+        <%= @api_user.errors.full_messages().first %>
+    </div>
+  <%end%>
+</div>

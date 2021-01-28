@@ -17,8 +17,8 @@
       <td><%= customer.id %></td>
       <td><%= customer.name %></td>
       <td><%= customer.api_users.count %></td>
-      <td><%= link_to "Naam wijzigen", edit_customer_path(customer) %></td>
-      <td><%= link_to "Verwijder klant", customer_path(customer), 
+      <td><%= link_to "Naam wijzigen", edit_admin_customer_path(customer) %></td>
+      <td><%= link_to "Verwijder klant", admin_customer_path(customer), 
           method: :delete, 
           data: { confirm: "Weet u zeker dat u de klant '#{customer.name} ' wilt verwijderen?" } %></td>
     </tr>
@@ -26,4 +26,4 @@
 </table>
 
 <!-- toon link voor toevoegen klant -->
-&nbsp;<%= link_to "+ Klant toevoegen", new_customer_path %>
+&nbsp;<%= link_to "+ Klant toevoegen", new_admin_customer_path %>

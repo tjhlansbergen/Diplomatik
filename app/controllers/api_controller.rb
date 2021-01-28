@@ -1,9 +1,9 @@
 # api_controller.rb - Tako Lansbergen 2020/01/26
 # 
 # Main controller voor de API van de Diplomatik web-api 
-# overerft ApplicationController
+# overerft van ActionContoller:API
 
-class ApiController < ApplicationController
+class ApiController < ActionContoller:API
     before_action :authorized     # vereist ingelogde gebruiker voor alle Endpoints
 
     # versleutelt gebruikersgegevens als token voor toegang tot de API endpoints na inloggen
@@ -41,7 +41,7 @@ class ApiController < ApplicationController
       !!logged_in_api_user
     end
   
-    # verifieerd of de gebruiker API gebruiker geauthoriseerd is aan de hand van het token in het request door achtereenvolgens logged_in, logged_in_api_user, decoded_token & auth_header aan te roepen
+    # verifieerd of de API gebruiker geauthoriseerd is aan de hand van het token in het request door achtereenvolgens logged_in, logged_in_api_user, decoded_token & auth_header aan te roepen
     def authorized
       render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
     end

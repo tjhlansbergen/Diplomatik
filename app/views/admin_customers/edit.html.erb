@@ -1,7 +1,7 @@
 <h2>Wijzig klantnaam: <%= @customer.name %></h2>
 
 <div class="form">
-    <%= form_with model: @customer do |form| %>
+    <%= form_with model: @customer, url: admin_customers_path, method: "update" do |form| %>
     <div>
         <span>Nieuwe klantnaam:</span>
         <%= form.text_field :name, value: nil %>    
