@@ -3,10 +3,22 @@
 <div class="form">
   <%= form_with model: @api_user, url: admin_api_users_path do |form| %>
     <div>
-      <span>Nieuwe gebruikersaam:</span>
+      <span>Gebruikersaam:</span>
       <%= form.text_field :username%><br>
-    </div>
 
+      <span>Wachtwoord:</span>
+      <%= form.password_field :password %>
+      
+      <span>Bevestig wachtwoord:</span>
+      <%= form.password_field :password_confirmation %>
+
+      <span>Klantnummer:<span>
+      <%= form.select :customer_id, Customer.all.select{ |customer|  customer.deleted == false }.pluck(:id) %>
+
+      <span>Mag andere gebruikers aanmaken?</span>
+      <%= form.check_box :can_add_users %>
+      <br /><br />
+    </div>
     <div>
       <%= form.submit "Maak aan" %>
     </div>
