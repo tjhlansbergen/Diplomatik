@@ -12,6 +12,18 @@ class ApiUsersController < ApiController
       render json: @users, :except => [:password_digest]
     end
 
+    # toont gevraagde gebruiker, indien deze bij de vragende klant hoort
+    def show
+       # haal user op
+       user_to_show = ApiUser.find(params[:id])
+
+      if user_to_show.customer_id == @api_user.customer_id
+        render json: user_to_show, :except => [:password_digest]
+      else
+        render_status :unauthorized
+      end
+    end
+
     # voegt API gebruiker toe
     def create
 
