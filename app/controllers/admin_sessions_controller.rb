@@ -17,7 +17,7 @@ class AdminSessionsController < AdminController
     if @admin_user && @admin_user.authenticate(params[:password])
       # inloggen gelukt, maak sessie, schrijf log entry en toon hoofdpagina
       session[:admin_user_id] = @admin_user.id
-      log LogEntry::INFORMATIONAL, "Beheerder #{@admin_user.username} is ingelogd"
+      log self.class.name, LogEntry::INFORMATIONAL, "Beheerder #{@admin_user.username} is ingelogd"
       redirect_to root_path
     else
       # inloggen mislukt, toon formulier opnieuw met melding

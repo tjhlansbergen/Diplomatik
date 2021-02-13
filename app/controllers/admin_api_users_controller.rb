@@ -21,7 +21,7 @@ class AdminApiUsersController < AdminController
         result = @api_user = ApiUser.create(api_user_params)
         if result.persisted?
             # aanmaken gelukt, schrijft logentry en toon beheeraccounts overzicht
-            log LogEntry::INFORMATIONAL, "App gebruiker #{@api_user.username}, klant-id #{@api_user.customer_id}, is aangemaakt door #{current_admin_user.username}"
+            log self.class.name, LogEntry::INFORMATIONAL, "App gebruiker #{@api_user.username}, klant-id #{@api_user.customer_id}, is aangemaakt door #{current_admin_user.username}"
             redirect_to admin_api_users_path
         else
             # aanmaken niet gelukt, toon formulier opniew (met foutmelding)
@@ -33,7 +33,7 @@ class AdminApiUsersController < AdminController
     def destroy
         @api_user = ApiUser.find(params[:id])
         @api_user.destroy
-        log LogEntry::INFORMATIONAL, "App gebruiker #{@api_user.username} is verwijderd door #{current_admin_user.username}"
+        log self.class.name, LogEntry::INFORMATIONAL, "App gebruiker #{@api_user.username} is verwijderd door #{current_admin_user.username}"
         redirect_to admin_api_users_path
     end
 

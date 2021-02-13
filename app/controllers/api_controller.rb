@@ -5,6 +5,7 @@
 
 class ApiController < ActionController::API
     before_action :authorized     # vereist ingelogde gebruiker voor alle Endpoints (die hiervan overerven)
+    rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found  # generieke methode voor alle API endpoints voor 404-not found
 
     # versleutelt gebruikersgegevens als token voor toegang tot de API endpoints na inloggen
     def encode_token(payload)
@@ -43,6 +44,18 @@ class ApiController < ActionController::API
   
     # verifieerd of de API gebruiker geauthoriseerd is aan de hand van het token in het request door achtereenvolgens logged_in, logged_in_api_user, decoded_token & auth_header aan te roepen
     def authorized
-      render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
+      render json: { status_code: Rack::Utils::SYMBOL_TO_STATUS_CODE[:unauthorized], message: :unauthorized }, status: :unauthorized unless logged_in?
+    end
+
+    # catch `m all voor errors vanwege ontbrekende records in de database (bijv. verwijderen niet bestaande user)
+    def record_not_found
+      render_status :not_found
+    end
+
+    # generieke methode voor het retourneren van een status met bijbehorende beschrijving, 
+    # zie https://guides.rubyonrails.org/layouts_and_rendering.html#the-status-option
+    # voor de toegestane statussen
+    def render_status(symbol)
+      render json: { status_code: Rack::Utils::SYMBOL_TO_STATUS_CODE[symbol], message: symbol }, status: symbol
     end
 end

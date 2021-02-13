@@ -21,7 +21,7 @@ class AdminUsersController < AdminController
     result = @admin_user = AdminUser.create(admin_user_params)
     if result.persisted?
       # aanmaken gelukt, schrijft logentry en toon beheeraccounts overzicht
-      log LogEntry::INFORMATIONAL, "Beheeracount #{@admin_user.username} is aangemaakt door #{current_admin_user.username}"
+      log self.class.name, LogEntry::INFORMATIONAL, "Beheeraccount #{@admin_user.username} is aangemaakt door #{current_admin_user.username}"
       redirect_to admin_users_path
     else
       # aanmaken niet gelukt, toon formulier opniew (met foutmelding)
@@ -40,7 +40,7 @@ class AdminUsersController < AdminController
 
     if @admin_user.update(admin_user_params)
       # wijzigen gelukt, schrijf logentry en toon overzicht
-      log LogEntry::INFORMATIONAL, "Beheeracount #{@admin_user.username} heeft wachtwoord gewijzigd"
+      log self.class.name, LogEntry::INFORMATIONAL, "Beheeraccount #{@admin_user.username} heeft wachtwoord gewijzigd"
       redirect_to admin_users_path
     else
       # wijzigen niet gelukt, toon formulier opnieuw (met foutmelding)
@@ -52,7 +52,7 @@ class AdminUsersController < AdminController
   def destroy
     @admin_user = AdminUser.find(params[:id])
     @admin_user.destroy
-    log LogEntry::INFORMATIONAL, "Beheeracount #{@admin_user.username} is verwijderd door #{current_admin_user.username}"
+    log self.class.name, LogEntry::INFORMATIONAL, "Beheeraccount #{@admin_user.username} is verwijderd door #{current_admin_user.username}"
     redirect_to admin_users_path
   end
 

@@ -28,7 +28,7 @@ class AdminCustomersController < AdminController
 
     if @customer.save
       # aanmaken gelukt, schrijft logentry en toon overzicht
-      log LogEntry::INFORMATIONAL, "Klant #{@customer.name}, id #{@customer.id}, is aangemaakt door #{current_admin_user.username}"
+      log self.class.name, LogEntry::INFORMATIONAL, "Klant #{@customer.name}, id #{@customer.id}, is aangemaakt door #{current_admin_user.username}"
       redirect_to admin_customers_path
     else
       # aanmaken niet gelukt, toon formulier opniew (met foutmelding
@@ -41,7 +41,7 @@ class AdminCustomersController < AdminController
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
       # wijzigen gelukt, schrijft logentry en toon overzicht
-      log LogEntry::INFORMATIONAL, "Klantnaam voor klant id #{@customer.id} is gewijzigd door #{current_admin_user.username}"
+      log self.class.name, LogEntry::INFORMATIONAL, "Klantnaam voor klant id #{@customer.id} is gewijzigd door #{current_admin_user.username}"
       redirect_to admin_customers_path
     else
       # wijzigen niet gelukt, toon formulier opnieuw (met foutmelding)
@@ -55,7 +55,7 @@ class AdminCustomersController < AdminController
     # 'soft' delete de klant, (de namen van) historische klanten blijven behouden in de database
     @customer.deleted = true
     @customer.save
-    log LogEntry::INFORMATIONAL, "Klant #{@customer.name}, id #{@customer.id}, is verwijderd door #{current_admin_user.username}"
+    log self.class.name, LogEntry::INFORMATIONAL, "Klant #{@customer.name}, id #{@customer.id}, is verwijderd door #{current_admin_user.username}"
     redirect_to admin_customers_path
   end
 
