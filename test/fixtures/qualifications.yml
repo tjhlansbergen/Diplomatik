@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  organization: MyString
+  qualifiation_type: one
+  api_user: one
+
+two:
+  name: MyString
+  organization: MyString
+  qualifiation_type: two
+  api_user: two

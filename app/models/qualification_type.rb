@@ -1,0 +1,2 @@
+class QualificationType < ApplicationRecord
+end

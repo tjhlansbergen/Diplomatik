@@ -4,19 +4,19 @@
 # overerft van ActionContoller:API
 
 class ApiSessionsController < ApiController
-    include LogHelper   # ten behoeve van logging
-    skip_before_action :authorized      # maakt inloggen beschikbaar voor niet ingelogde gebruikers
+  include LogHelper   # ten behoeve van logging
+  skip_before_action :authorized      # maakt inloggen beschikbaar voor niet ingelogde gebruikers
 
-    # API user login, op basis van gebruikersnaam & wachtwoord, retourneerd het authorisatie token
-    def login
-        @api_user = ApiUser.find_by(username: params[:username])
-    
-        if @api_user && @api_user.authenticate(params[:password])
-            token = encode_token({user_id: @api_user.id})
-            log self.class.name, LogEntry::INFORMATIONAL, "Sessie token afgegeven aan app-gebruiker #{@api_user.username}"
-            render json: {user_id: @api_user.id, user_name: @api_user.username, customer_id:@api_user.customer_id, token: token}
-        else
-            render_status :bad_request
-        end
+  # API user login, op basis van gebruikersnaam & wachtwoord, retourneerd het authorisatie token
+  def login
+    @api_user = ApiUser.find_by(username: params[:username])
+
+    if @api_user && @api_user.authenticate(params[:password])
+      token = encode_token({user_id: @api_user.id})
+      log self.class.name, LogEntry::INFORMATIONAL, "Sessie token afgegeven aan app-gebruiker #{@api_user.username}"
+      render json: {user_id: @api_user.id, user_name: @api_user.username, customer_id:@api_user.customer_id, token: token}
+    else
+      render_status :bad_request
     end
+  end
 end

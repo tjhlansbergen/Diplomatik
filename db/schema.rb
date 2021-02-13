@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_13_112047) do
+ActiveRecord::Schema.define(version: 2021_02_13_201101) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "username"
@@ -44,5 +44,24 @@ ActiveRecord::Schema.define(version: 2021_02_13_112047) do
     t.string "origin"
   end
 
+  create_table "qualification_types", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "qualifications", force: :cascade do |t|
+    t.string "name"
+    t.string "organization"
+    t.integer "qualification_type_id", null: false
+    t.integer "api_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["api_user_id"], name: "index_qualifications_on_api_user_id"
+    t.index ["qualification_type_id"], name: "index_qualifications_on_qualification_type_id"
+  end
+
   add_foreign_key "api_users", "customers"
+  add_foreign_key "qualifications", "api_users"
+  add_foreign_key "qualifications", "qualification_types"
 end

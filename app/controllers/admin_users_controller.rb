@@ -5,6 +5,7 @@
 
 class AdminUsersController < AdminController
   include LogHelper   # ten behoeve van logging
+  
 
   # toont views/admin_users/index.html.erb en laadt het benodigde model voor de view
   def index

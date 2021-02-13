@@ -15,5 +15,10 @@ admin_users = AdminUser.create([
 api_user = ApiUser.create([
     {username: "alex@inholland.nl", password: "novi!0033", customer_id: 3, can_add_users: true}])
 
-customers = Customer.create(name: "Novi Hogeschool", deleted: false)
+customers = Customer.create([
+    {name: "Novi Hogeschool", deleted: false}])
+
+qualification_types = QualificationType.create([
+    {description: "Diploma"},
+    {description: "Certificaat"}])
 

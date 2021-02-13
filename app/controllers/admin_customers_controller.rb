@@ -60,6 +60,7 @@ class AdminCustomersController < AdminController
   end
 
   # gedeelde methode voor verifieren van invoer
+  private 
   def customer_params
     params.require(:customer).permit(:name)
   end
