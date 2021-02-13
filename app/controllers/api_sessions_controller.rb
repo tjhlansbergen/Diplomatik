@@ -4,6 +4,7 @@
 # overerft van ActionContoller:API
 
 class ApiSessionsController < ApiController
+    include LogHelper   # ten behoeve van logging
     skip_before_action :authorized      # maakt inloggen beschikbaar voor niet ingelogde gebruikers
 
     # API user login, op basis van gebruikersnaam & wachtwoord, retourneerd het authorisatie token

@@ -9,6 +9,7 @@ class ApiController < ActionController::API
 
     # versleutelt gebruikersgegevens als token voor toegang tot de API endpoints na inloggen
     def encode_token(payload)
+      payload[:exp] = 24.hours.from_now.to_i
       JWT.encode(payload, Rails.configuration.jwt_seed)
     end
   
@@ -24,7 +25,7 @@ class ApiController < ActionController::API
         begin
           JWT.decode(token, Rails.configuration.jwt_seed, true, algorithm: 'HS256')
         rescue JWT::DecodeError
-          nil
+          nil # toegang wordt geweigerd als het token onjuist of verlopen is, toon de precieze reden bewust niet om geen informatie prijs te geven over de levensduur van het token
         end
       end
     end
@@ -44,7 +45,7 @@ class ApiController < ActionController::API
   
     # verifieerd of de API gebruiker geauthoriseerd is aan de hand van het token in het request door achtereenvolgens logged_in, logged_in_api_user, decoded_token & auth_header aan te roepen
     def authorized
-      render json: { status_code: Rack::Utils::SYMBOL_TO_STATUS_CODE[:unauthorized], message: :unauthorized }, status: :unauthorized unless logged_in?
+      render_status :unauthorized unless logged_in?
     end
 
     # catch `m all voor errors vanwege ontbrekende records in de database (bijv. verwijderen niet bestaande user)
