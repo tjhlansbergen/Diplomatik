@@ -7,6 +7,7 @@ class ApiUser < ApplicationRecord
   belongs_to :customer    # foreign key naar de customer tabel
 
   validates :username, presence: { message: "Geef een geldige gebruikersnaam op" }
+  validates :username, uniqueness: { message: "Gebruikersnaam is al in gebruik" }
   validates :password, presence: { message: "Geef een geldig wachtwoord op" }, length: { minimum: 8, :message => "Wachtwoord is te kort (gebruik minimaal 8 tekens)" }
   validates_confirmation_of :password, :message => "De opgegeven wachtwoorden komen niet overeen"
 

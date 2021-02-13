@@ -17,6 +17,7 @@ class AdminUser < ApplicationRecord
     # valideer het huidige wachtwoord nogmaals bij wijzigen wachtwoord
     # valideer dat het nieuwe wacht anders is dan het huidige
     validates :username, presence: { message: "Geef een geldige gebruikersnaam op" }
+    validates :username, uniqueness: { message: "Gebruikersnaam is al in gebruik" }
     validates :password, presence: { message: "Geef een geldig wachtwoord op" }, length: { minimum: 8, :message => "Wachtwoord is te kort (gebruik minimaal 8 tekens)" }
     validates_confirmation_of :password, :message => "De opgegeven wachtwoorden komen niet overeen"
     validate :current_password_is_correct, on: :update
