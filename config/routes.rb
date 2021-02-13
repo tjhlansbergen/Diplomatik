@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :admin_customers
   resources :admin_users
   resources :admin_api_users
+  resources :api_users, path: 'api/users'
   
   post "/api/login", to: "api_sessions#login"
   get "/api/auto_login", to: "api_users#auto_login"   # nog nodig?

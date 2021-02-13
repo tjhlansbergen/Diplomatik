@@ -4,7 +4,7 @@
 # overerft van ActionContoller:API
 
 class ApiController < ActionController::API
-    before_action :authorized     # vereist ingelogde gebruiker voor alle Endpoints
+    before_action :authorized     # vereist ingelogde gebruiker voor alle Endpoints (die hiervan overerven)
 
     # versleutelt gebruikersgegevens als token voor toegang tot de API endpoints na inloggen
     def encode_token(payload)
