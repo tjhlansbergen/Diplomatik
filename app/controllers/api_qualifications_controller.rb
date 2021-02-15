@@ -9,7 +9,11 @@ class ApiQualificationsController < ApiController
   def create
     if result = Qualification.create!(qualification_params)
       # aanmaken gelukt, schrijf log en retourneer de aangemaakte kwalificatie, als indicatie dat de actie succesvol was
-      log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{result.name} aangemaakt door #{@api_user.username}"
+      log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{result.name} aangemaakt door #{@api_user.username}, klant id #{@api_user.customer_id}"
+
+      # vol koppeltabel
+      result.customers.push(@api_user.customer)
+
       render json: result
     else
       render_status :unprocessable_entity
@@ -19,6 +23,6 @@ class ApiQualificationsController < ApiController
   # gedeelde methode voor verifieren van invoer
   private 
   def qualification_params
-    params.require(:api_qualification).permit(:qualification_type_id, :name, :organization).merge(api_user_id: @api_user.id)
+    params.require(:api_qualification).permit(:qualification_type_id, :name, :organization)
   end
 end

@@ -69,7 +69,7 @@ class ApiUsersController < ApiController
       # vind de te verwijderen gebruiker
       user_to_delete = ApiUser.find(params[:id])
 
-      # verwijder app-gebruiker als deze bij de klant van e ingelogde gebruiker hoort
+      # verwijder app-gebruiker als deze bij de klant van de ingelogde gebruiker hoort
       if user_to_delete.customer_id == @api_user.customer_id
         user_to_delete.destroy
         # verwijderen gelukt, schrijf log en retourneer de aangemaakte gebruiker, als indicatie dat de actie succesvol was
