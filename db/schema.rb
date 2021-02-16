@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_183708) do
+ActiveRecord::Schema.define(version: 2021_02_16_193022) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "username"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_183708) do
     t.integer "customer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "code"
     t.index ["customer_id"], name: "index_courses_on_customer_id"
   end
 

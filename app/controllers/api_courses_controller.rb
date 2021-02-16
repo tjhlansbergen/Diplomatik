@@ -105,6 +105,6 @@ class ApiCoursesController < ApiController
   # gedeelde methode voor verifieren van invoer
   private 
   def course_params
-    params.require(:api_course).permit(:name).merge(customer: @api_user.customer)
+    params.require(:api_course).permit(:name, :code).merge(customer: @api_user.customer)
   end
 end
