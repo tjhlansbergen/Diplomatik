@@ -6,13 +6,13 @@
 class ApiCoursesController < ApiController
   include LogHelper   # ten behoeve van logging 
 
-  # toon een enkel item (mits) bij de klant)
+  # toon een enkel item (mits behorende bij de klant)
   def show
     # haal vak op
     course_to_show = Course.find(params[:id])
 
     if course_to_show.customer_id == @api_user.customer_id
-      render json: course_to_show
+      render json: {course: course_to_show, qualifications: course_to_show.qualifications}
     else
       render_status :unauthorized
     end
@@ -63,20 +63,40 @@ class ApiCoursesController < ApiController
       return
     end
 
-    # vindt de te koppelen kwalificatie
-    qualification_to_link = Qualification.find(params[:qualification])
+    # koppelen van kwalificatie aan vak
+    if params[:add].present? 
 
-    if qualification_to_link.customers.exclude?(@api_user.customer)
-      # kwalificatie niet gekoppeld aan klant
-      render_status :forbidden
-      return
+      # vindt de te koppelen kwalificatie
+      qualification_to_link = Qualification.find(params[:add])
+
+      if qualification_to_link.customers.exclude?(@api_user.customer)
+        # kwalificatie niet gekoppeld aan klant
+        render_status :forbidden
+        return
+      end
+
+      # vul koppeltabel
+      if course_to_link && qualification_to_link
+        unless course_to_link.qualifications.include? qualification_to_link
+          course_to_link.qualifications.append(qualification_to_link)
+          log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{qualification_to_link.name} gekoppeld aan vak #{course_to_link.name} door #{@api_user.username}}"
+        end
+      end
+
     end
 
-    # vul koppeltabel
-    if course_to_link && qualification_to_link
-      unless course_to_link.qualifications.include? qualification_to_link
-        log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{qualification_to_link.name} toegevoegd aan vak #{course_to_link.name} door #{@api_user.username}}"
-        course_to_link.qualifications.append(qualification_to_link)
+    # ONTkoppelen van kwalificatie van vak
+    if params[:remove].present?
+
+      # vindt de te koppelen kwalificatie
+      qualification_to_unlink = Qualification.find(params[:remove])
+
+      # verwijder uit koppeltabel
+      if course_to_link && qualification_to_unlink
+        if course_to_link.qualifications.include?(qualification_to_unlink)
+          course_to_link.qualifications.delete(qualification_to_unlink)
+          log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{qualification_to_unlink.name} ontkoppeld van vak #{course_to_link.name} door #{@api_user.username}}"
+        end
       end
     end
 
