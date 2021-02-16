@@ -55,8 +55,6 @@ class ApiUsersController < ApiController
       end
     end
 
-    # update
-
     # verwijder app-gebruiker
     def destroy
 
@@ -72,7 +70,7 @@ class ApiUsersController < ApiController
       # verwijder app-gebruiker als deze bij de klant van de ingelogde gebruiker hoort
       if user_to_delete.customer_id == @api_user.customer_id
         user_to_delete.destroy
-        # verwijderen gelukt, schrijf log en retourneer de aangemaakte gebruiker, als indicatie dat de actie succesvol was
+        # verwijderen gelukt, schrijf log 
         log self.class.name, LogEntry::INFORMATIONAL, "App-gebruiker #{user_to_delete.username} verwijderd door #{@api_user.username}"
       else
         # gebruiker van andere klant, retourneer foutmelding

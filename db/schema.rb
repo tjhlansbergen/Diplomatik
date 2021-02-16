@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_15_201758) do
+ActiveRecord::Schema.define(version: 2021_02_16_142510) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "username"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 2021_02_15_201758) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "can_add_users"
     t.index ["customer_id"], name: "index_api_users_on_customer_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.integer "customer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_courses_on_customer_id"
   end
 
   create_table "customer_qualifications", id: false, force: :cascade do |t|
@@ -67,6 +75,7 @@ ActiveRecord::Schema.define(version: 2021_02_15_201758) do
   end
 
   add_foreign_key "api_users", "customers"
+  add_foreign_key "courses", "customers"
   add_foreign_key "customer_qualifications", "customers"
   add_foreign_key "customer_qualifications", "qualifications"
   add_foreign_key "qualifications", "qualification_types"

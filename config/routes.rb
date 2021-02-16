@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :admin_api_users
   resources :api_users, path: 'api/users'
   resources :api_qualifications, path: 'api/qualifications'
+  resources :api_courses, path: 'api/courses'
   
   post "/api/login", to: "api_sessions#login"
   

@@ -1,4 +1,4 @@
-# qualification_controller.rb - Tako Lansbergen 2020/02/21
+# api_qualification_controller.rb - Tako Lansbergen 2020/02/21
 # 
 # Controller voor het API endpoint voor Kwalificaties van de Diplomatik web-api 
 # overerft van ApiController
@@ -16,7 +16,7 @@ class ApiQualificationsController < ApiController
     if(params[:all])
       render json: Qualification.all
     else
-      render json:Qualification.includes(:customers).where(customers: { id: @api_user.customer_id}) 
+      render json: Qualification.includes(:customers).where(customers: { id: @api_user.customer_id}) 
     end
   end
 
