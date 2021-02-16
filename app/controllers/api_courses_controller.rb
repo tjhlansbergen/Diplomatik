@@ -41,14 +41,43 @@ class ApiCoursesController < ApiController
     # vind het te verwijderen vak
     course_to_delete = Course.find(params[:id])
 
-    # verwijder app-gebruiker als deze bij de klant van de ingelogde gebruiker hoort
+    # verwijder vak als deze bij de klant van de ingelogde gebruiker hoort
     if course_to_delete.customer_id == @api_user.customer_id
       course_to_delete.destroy
       # verwijderen gelukt, schrijf log 
       log self.class.name, LogEntry::INFORMATIONAL, "Vak #{course_to_delete.name} verwijderd door #{@api_user.username}"
     else
-      # gebruiker van andere klant, retourneer foutmelding
+      # vak van andere klant, retourneer foutmelding
       render_status :forbidden
+    end
+  end
+
+  def update
+
+    # vindt het te koppelen vak 
+    course_to_link = Course.find(params[:id])
+
+    if course_to_link.customer_id != @api_user.customer_id
+      # vak van andere klant, retourneer foutmelding
+      render_status :forbidden
+      return
+    end
+
+    # vindt de te koppelen kwalificatie
+    qualification_to_link = Qualification.find(params[:qualification])
+
+    if qualification_to_link.customers.exclude?(@api_user.customer)
+      # kwalificatie niet gekoppeld aan klant
+      render_status :forbidden
+      return
+    end
+
+    # vul koppeltabel
+    if course_to_link && qualification_to_link
+      unless course_to_link.qualifications.include? qualification_to_link
+        log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{qualification_to_link.name} toegevoegd aan vak #{course_to_link.name} door #{@api_user.username}}"
+        course_to_link.qualifications.append(qualification_to_link)
+      end
     end
 
   end

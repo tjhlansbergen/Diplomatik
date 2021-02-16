@@ -69,7 +69,6 @@ class ApiQualificationsController < ApiController
         qualification_to_link.customers.append(@api_user.customer)
       end
     end
-
   end
 
   # gedeelde methode voor verifieren van invoer
