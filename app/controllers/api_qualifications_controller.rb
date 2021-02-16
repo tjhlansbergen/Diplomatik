@@ -1,7 +1,7 @@
 # qualification_controller.rb - Tako Lansbergen 2020/02/21
 # 
 # Controller voor het API endpoint voor Kwalificaties van de Diplomatik web-api 
-# overerft ApiController
+# overerft van ApiController
 
 class ApiQualificationsController < ApiController
   include LogHelper   # ten behoeve van logging 
@@ -16,7 +16,7 @@ class ApiQualificationsController < ApiController
     if(params[:all])
       render json: Qualification.all
     else
-    #render json:Qualification.includes(:customers).where(customers: { id: @api_user.customer_id}) 
+      render json:Qualification.includes(:customers).where(customers: { id: @api_user.customer_id}) 
     end
   end
 
@@ -65,6 +65,7 @@ class ApiQualificationsController < ApiController
     # vul koppeltabel
     if qualification_to_link
       unless qualification_to_link.customers.include? @api_user.customer
+        log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{qualification_to_link.name} toegevoegd aan klant id #{@api_user.customer_id} door #{@api_user.username}}"
         qualification_to_link.customers.append(@api_user.customer)
       end
     end
