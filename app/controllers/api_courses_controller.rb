@@ -26,7 +26,7 @@ class ApiCoursesController < ApiController
   # toevoegen van vakken
   def create
     if result = Course.create!(course_params)
-      # aanmaken gelukt, schrijf log en retourneer de aangemaakte kwalificatie, als indicatie dat de actie succesvol was
+      # aanmaken gelukt, schrijf log en retourneer het aangemaakte vak, als indicatie dat de actie succesvol was
       log self.class.name, LogEntry::INFORMATIONAL, "Vak #{result.name} aangemaakt door #{@api_user.username}, klant id #{@api_user.customer_id}"
 
       render json: result

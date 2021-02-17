@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :api_users, path: 'api/users'
   resources :api_qualifications, path: 'api/qualifications'
   resources :api_courses, path: 'api/courses'
+  resources :api_students, path: 'api/students'
   
   post "/api/login", to: "api_sessions#login"
   
