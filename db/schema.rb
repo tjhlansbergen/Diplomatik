@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_193022) do
+ActiveRecord::Schema.define(version: 2021_02_17_185746) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "username"
@@ -82,6 +82,22 @@ ActiveRecord::Schema.define(version: 2021_02_16_193022) do
     t.index ["qualification_type_id"], name: "index_qualifications_on_qualification_type_id"
   end
 
+  create_table "student_qualifications", force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.integer "qualification_id", null: false
+    t.index ["qualification_id"], name: "index_student_qualifications_on_qualification_id"
+    t.index ["student_id"], name: "index_student_qualifications_on_student_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "name"
+    t.string "student_number"
+    t.integer "customer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_students_on_customer_id"
+  end
+
   add_foreign_key "api_users", "customers"
   add_foreign_key "course_qualifications", "courses"
   add_foreign_key "course_qualifications", "qualifications"
@@ -89,4 +105,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_193022) do
   add_foreign_key "customer_qualifications", "customers"
   add_foreign_key "customer_qualifications", "qualifications"
   add_foreign_key "qualifications", "qualification_types"
+  add_foreign_key "student_qualifications", "qualifications"
+  add_foreign_key "student_qualifications", "students"
+  add_foreign_key "students", "customers"
 end

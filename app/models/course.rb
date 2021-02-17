@@ -5,4 +5,5 @@ class Course < ApplicationRecord
 
   validates :name, presence: true
   validates_uniqueness_of :name, scope: :customer
+  validates :customer, presence: true
 end

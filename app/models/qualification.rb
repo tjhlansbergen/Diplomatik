@@ -4,6 +4,8 @@ class Qualification < ApplicationRecord
   has_many :customers, :through => :customer_qualifications
   has_many :course_qualifications
   has_many :courses, :through => :course_qualifications
+  has_many :student_qualifications
+  has_many :students, :through => :student_qualifications
   
 
   validates :name, presence: true
