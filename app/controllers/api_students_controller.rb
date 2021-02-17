@@ -12,8 +12,12 @@ class ApiStudentsController < ApiController
     student_to_show = Student.find(params[:id])
 
     if student_to_show.customer_id == @api_user.customer_id
-      render json: {student: student_to_show, qualifications: student_to_show.qualifications}
-      # TODO ook vrijstellingen tonen?
+
+      # bepaal de vrijstellingen voor de student (de vakken behorende bij zijn kwalificaties)
+      exemptions = student_to_show.qualifications.collect{|q| q.courses.where(customer: @api_user.customer)}.uniq{ |course| course.name }
+
+      render json: {student: student_to_show, qualifications: student_to_show.qualifications, exemptions: exemptions}
+
     else
       render_status :unauthorized
     end
