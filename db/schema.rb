@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2021_02_17_185746) do
     t.index ["customer_id"], name: "index_api_users_on_customer_id"
   end
 
-  create_table "course_qualifications", force: :cascade do |t|
+  create_table "course_qualifications", id: false, force: :cascade do |t|
     t.integer "course_id", null: false
     t.integer "qualification_id", null: false
     t.index ["course_id"], name: "index_course_qualifications_on_course_id"
@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 2021_02_17_185746) do
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
+    t.string "code"
     t.integer "customer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "code"
     t.index ["customer_id"], name: "index_courses_on_customer_id"
   end
 
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2021_02_17_185746) do
     t.index ["qualification_type_id"], name: "index_qualifications_on_qualification_type_id"
   end
 
-  create_table "student_qualifications", force: :cascade do |t|
+  create_table "student_qualifications", id: false, force: :cascade do |t|
     t.integer "student_id", null: false
     t.integer "qualification_id", null: false
     t.index ["qualification_id"], name: "index_student_qualifications_on_qualification_id"

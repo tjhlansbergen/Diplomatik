@@ -47,8 +47,13 @@ class ApiQualificationsController < ApiController
       # verwijder uit koppeltabel
       qualification_to_delete.customers.delete(@api_user.customer)
 
-      # als dit de laatste verwijzing naar de kwalificatie was, verwijderd dan ook de kwalificatie
-      if qualification_to_delete.customers.count == 0
+      # eventuele bestaande verwijzingen vanuit vakken en/of student blijven bestaan
+
+      # tel verwijzingen (ook van andere klanten)
+      references = qualification_to_delete.customers.count + qualification_to_delete.students.count + qualification_to_delete.courses.count
+
+      # als er geen enkele verwijzing naar de kwalificatie meer bestaat, verwijder dan ook de kwalificatie
+      if references == 0
         log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{qualification_to_delete.name} verwijderd"
         qualification_to_delete.destroy
       end

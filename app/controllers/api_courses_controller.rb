@@ -43,6 +43,10 @@ class ApiCoursesController < ApiController
 
     # verwijder vak als deze bij de klant van de ingelogde gebruiker hoort
     if course_to_delete.customer_id == @api_user.customer_id
+
+      # verwijder eerst verwijzigen (de koppelingen naar kwalificaties, niet de kwalificaties zelf)
+      course_to_delete.qualifications.clear()
+
       course_to_delete.destroy
       # verwijderen gelukt, schrijf log 
       log self.class.name, LogEntry::INFORMATIONAL, "Vak #{course_to_delete.name} verwijderd door #{@api_user.username}"

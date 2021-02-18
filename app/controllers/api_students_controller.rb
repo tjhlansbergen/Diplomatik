@@ -49,6 +49,10 @@ class ApiStudentsController < ApiController
 
     # verwijder student als deze bij de klant van de ingelogde gebruiker hoort
     if student_to_delete.customer_id == @api_user.customer_id
+
+      # verwijder eerst verwijzingen (de koppelingen naar kwalificaties van de student, niet de kwalificaties zelf)
+      student_to_delete.qualifications.clear()
+
       student_to_delete.destroy
       # verwijderen gelukt, schrijf log 
       log self.class.name, LogEntry::INFORMATIONAL, "Student #{student_to_delete.name} verwijderd door #{@api_user.username}"
