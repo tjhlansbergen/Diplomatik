@@ -7,7 +7,7 @@ class ApiSessionsController < ApiController
   include LogHelper   # ten behoeve van logging
   skip_before_action :authorized      # maakt inloggen beschikbaar voor niet ingelogde gebruikers
 
-  # API user login, op basis van gebruikersnaam & wachtwoord, retourneerd het authorisatie token
+  # API user login, op basis van gebruikersnaam & wachtwoord, retourneert het authorisatie token
   def login
     @api_user = ApiUser.find_by(username: params[:username])
 

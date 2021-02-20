@@ -30,6 +30,7 @@ class AdminController < ActionController::Base
     @admin_count = AdminUser.count
     @qualifications_count = Qualification.count
     @courses_count = Course.count
+    @students_count = Student.count
     @log_entries = LogEntry.all.order(created_at: :desc)
   end
 end
