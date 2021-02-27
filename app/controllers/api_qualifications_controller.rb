@@ -9,7 +9,13 @@ class ApiQualificationsController < ApiController
   # toon een enkel item
   def show
     qualification_to_show = Qualification.find(params[:id]);
-    render json: {qualification: qualification_to_show, courses: qualification_to_show.courses} 
+    
+    if qualification_to_show.customers.where(id: @api_user.customer_id).any?
+      courses = qualification_to_show.courses.where(customer_id: @api_user.customer_id)
+      render json: {qualification: qualification_to_show, courses: courses}
+    else
+      render_status :unauthorized
+    end
   end
 
   # toon alle items (behorende bij de klant, tenzij anders aangegeven)
@@ -45,15 +51,19 @@ class ApiQualificationsController < ApiController
     if qualification_to_delete
       log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{qualification_to_delete.name} verwijderd voor klant id #{@api_user.customer_id} door #{@api_user.username}"
 
-      # verwijder uit koppeltabel
-      qualification_to_delete.customers.delete(@api_user.customer)
+      # verwijder alle koppelingen van tussen vakken van de klant en deze kwalificatie
+      qualification_to_delete.courses.where(customer: @api_user.customer).each { |course| qualification_to_delete.courses.delete(course)}
 
-      # eventuele bestaande verwijzingen vanuit vakken en/of student blijven bestaan
+      # verwijder alle koppelingen van tussen studenten van de klant en deze kwalificatie
+      qualification_to_delete.students.where(customer: @api_user.customer).each { |student| qualification_to_delete.students.delete(student)}
+
+      # verwijder verwijzing klant en kwalificatie (de kwalificatie zelf blijft hier nog wel bestaan)
+      qualification_to_delete.customers.delete(@api_user.customer)
 
       # tel verwijzingen (ook van andere klanten)
       references = qualification_to_delete.customers.count + qualification_to_delete.students.count + qualification_to_delete.courses.count
 
-      # als er geen enkele verwijzing naar de kwalificatie meer bestaat, verwijder dan ook de kwalificatie
+      # als er geen enkele verwijzing naar de kwalificatie meer bestaat, verwijder alleen dan ook de kwalificatie zelf
       if references == 0
         log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{qualification_to_delete.name} verwijderd"
         qualification_to_delete.destroy
