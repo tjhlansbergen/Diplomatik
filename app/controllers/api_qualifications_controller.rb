@@ -8,13 +8,14 @@ class ApiQualificationsController < ApiController
 
   # toon een enkel item
   def show
-    render json: Qualification.find(params[:id])
+    qualification_to_show = Qualification.find(params[:id]);
+    render json: {qualification: qualification_to_show, courses: qualification_to_show.courses} 
   end
 
   # toon alle items (behorende bij de klant, tenzij anders aangegeven)
   def index
-    if(params[:all])
-      render json: Qualification.all
+    if(params[:unselected])
+      render json: Qualification.all - Qualification.includes(:customers).where(customers: { id: @api_user.customer_id}) 
     else
       render json: Qualification.includes(:customers).where(customers: { id: @api_user.customer_id}) 
     end
@@ -61,7 +62,7 @@ class ApiQualificationsController < ApiController
 
   end
 
-  # koppelen van bestaande kwalificaties
+  # koppelen van bestaande kwalificaties aan de aanroepende klant
   def update
 
     # haal de gevraagde kwalificatie op
