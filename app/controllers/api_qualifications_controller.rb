@@ -66,7 +66,7 @@ class ApiQualificationsController < ApiController
       # als er geen enkele verwijzing naar de kwalificatie meer bestaat, verwijder alleen dan ook de kwalificatie zelf
       if references == 0
         log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{qualification_to_delete.name} verwijderd"
-        qualification_to_delete.destroy
+       # qualification_to_delete.destroy
       end
     end
 
@@ -81,7 +81,7 @@ class ApiQualificationsController < ApiController
     # vul koppeltabel
     if qualification_to_link
       unless qualification_to_link.customers.include? @api_user.customer
-        log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{qualification_to_link.name} toegevoegd aan klant id #{@api_user.customer_id} door #{@api_user.username}}"
+        log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{qualification_to_link.name} toegevoegd aan klant id #{@api_user.customer_id} door #{@api_user.username}"
         qualification_to_link.customers.append(@api_user.customer)
       end
     end

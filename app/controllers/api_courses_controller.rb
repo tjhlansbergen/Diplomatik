@@ -61,54 +61,45 @@ class ApiCoursesController < ApiController
     # vindt het te koppelen vak 
     course_to_link = Course.find(params[:id])
 
-    if course_to_link.customer_id != @api_user.customer_id
-      # vak van andere klant, retourneer foutmelding
-      render_status :forbidden
-      return
-    end
+    if course_to_link
 
-    # koppelen van kwalificatie aan vak
-    if params[:add].present? 
-
-      # vindt de te koppelen kwalificatie
-      qualification_to_link = Qualification.find(params[:add])
-
-      if qualification_to_link.customers.exclude?(@api_user.customer)
-        # kwalificatie niet gekoppeld aan klant
+      if course_to_link.customer_id != @api_user.customer_id
+        # vak van andere klant, retourneer foutmelding
         render_status :forbidden
         return
       end
 
-      # vul koppeltabel
-      if course_to_link && qualification_to_link
-        unless course_to_link.qualifications.include? qualification_to_link
-          course_to_link.qualifications.append(qualification_to_link)
-          log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{qualification_to_link.name} gekoppeld aan vak #{course_to_link.name} door #{@api_user.username}}"
+      # verwijder bestaande koppelingen
+      course_to_link.qualifications.clear()
+
+      # en stel de nieuwe in
+      params[:qualification_ids].each { |id| 
+        qualification_to_link = Qualification.find(id)
+
+        if qualification_to_link.customers.exclude?(@api_user.customer)
+          # kwalificatie niet gekoppeld aan klant
+          render_status :forbidden
+          return
         end
-      end
+
+        # vul koppeltabel
+        if course_to_link && qualification_to_link
+          unless course_to_link.qualifications.include? qualification_to_link
+            course_to_link.qualifications.append(qualification_to_link)
+          end
+        end
+      }
+
+      
+      # log
+      log self.class.name, LogEntry::INFORMATIONAL, "Kwalificaties #{params[:qualification_ids]} gekoppeld aan vak #{course_to_link.name} door #{@api_user.username}"
 
     end
-
-    # ONTkoppelen van kwalificatie van vak
-    if params[:remove].present?
-
-      # vindt de te koppelen kwalificatie
-      qualification_to_unlink = Qualification.find(params[:remove])
-
-      # verwijder uit koppeltabel
-      if course_to_link && qualification_to_unlink
-        if course_to_link.qualifications.include?(qualification_to_unlink)
-          course_to_link.qualifications.delete(qualification_to_unlink)
-          log self.class.name, LogEntry::INFORMATIONAL, "Kwalificatie #{qualification_to_unlink.name} ontkoppeld van vak #{course_to_link.name} door #{@api_user.username}}"
-        end
-      end
-    end
-
   end
 
   # gedeelde methode voor verifieren van invoer
   private 
   def course_params
-    params.require(:api_course).permit(:name, :code).merge(customer: @api_user.customer)
+    params.require(:api_course).permit(:name, :code, :qualification_ids).merge(customer: @api_user.customer)
   end
 end
