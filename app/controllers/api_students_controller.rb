@@ -14,7 +14,7 @@ class ApiStudentsController < ApiController
     if student_to_show.customer_id == @api_user.customer_id
 
       # bepaal de vrijstellingen voor de student (de vakken behorende bij zijn kwalificaties)
-      exemptions = student_to_show.qualifications.collect{|q| q.courses.where(customer: @api_user.customer)}.uniq{ |course| course.name }
+      exemptions = student_to_show.qualifications.map{|q| q.courses.where(customer: @api_user.customer)}.uniq{ |course| course.name }.flatten
 
       # retourneer student en zijn kwalificaties plus bijbehorende vrijstellingen als JSON
       render json: {student: student_to_show, qualifications: student_to_show.qualifications, exemptions: exemptions}
