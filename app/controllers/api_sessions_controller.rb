@@ -14,7 +14,7 @@ class ApiSessionsController < ApiController
     if @api_user && @api_user.authenticate(params[:password])
       token = encode_token({user_id: @api_user.id})
       log self.class.name, LogEntry::INFORMATIONAL, "Sessie token afgegeven aan app-gebruiker #{@api_user.username}"
-      render json: {user_id: @api_user.id, user_name: @api_user.username, customer_id:@api_user.customer_id, customer_name:@api_user.customer.name, can_add_users:@api_user.can_add_users, token: token}
+      render json: {id: @api_user.id, username: @api_user.username, customer_id:@api_user.customer_id, customer_name:@api_user.customer.name, can_add_users:@api_user.can_add_users, token: token}
     else
       render_status :bad_request
     end

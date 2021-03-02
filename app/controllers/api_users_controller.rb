@@ -5,17 +5,30 @@
 
 class ApiUsersController < ApiController
     include LogHelper   # ten behoeve van logging 
-    
+
     # toont bestaande gebruikers voor de klant van de ingelogde gebruiker
     def index
+      # alleen beschikbaar met gebruikersbeheer rechten
+      if not @api_user.can_add_users
+        render_status :forbidden
+        return
+      end
+      
       @users = ApiUser.where(customer_id: @api_user.customer_id)
       render json: @users, :except => [:password_digest]
     end
 
     # toont gevraagde gebruiker, indien deze bij de vragende klant hoort
     def show
-       # haal user op
-       user_to_show = ApiUser.find(params[:id])
+
+      # alleen beschikbaar met gebruikersbeheer rechten
+      if not @api_user.can_add_users
+        render_status :forbidden
+        return
+      end
+
+      # haal user op
+      user_to_show = ApiUser.find(params[:id])
 
       if user_to_show.customer_id == @api_user.customer_id
         render json: user_to_show, :except => [:password_digest]
