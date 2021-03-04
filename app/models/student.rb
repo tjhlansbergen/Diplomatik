@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: students
+#
+#  id             :integer          not null, primary key
+#  name           :string
+#  student_number :string
+#  customer_id    :integer          not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
 class Student < ApplicationRecord
   belongs_to :customer
   has_many :student_qualifications

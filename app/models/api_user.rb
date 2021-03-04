@@ -3,6 +3,19 @@
 # Model voor een App account
 # overerft van ApplicationRecord
 
+# == Schema Information
+#
+# Table name: api_users
+#
+#  id              :integer          not null, primary key
+#  username        :string
+#  password_digest :string
+#  customer_id     :integer          not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  can_add_users   :boolean
+#
+
 class ApiUser < ApplicationRecord
   belongs_to :customer    # foreign key naar de customer tabel
 
