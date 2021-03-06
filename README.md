@@ -17,3 +17,5 @@ Opstarten:
 - Voer het commando `rails server` uit voor het starten van de applicatie.
 
 Na het opstarten is de applicatie beschibaar via de URL: http://localhost:3000
+
+Zie https://guides.rubyonrails.org/getting_started.html voor uitleg van de projectstructuur
