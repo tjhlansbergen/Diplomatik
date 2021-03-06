@@ -1,6 +1,6 @@
 # README
 
-Diplomatik-web
+## Diplomatik-web
 
 Ruby versie: 2.7.2
 Rials versie: Rails 6.1.1
