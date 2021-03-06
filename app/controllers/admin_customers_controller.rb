@@ -31,7 +31,7 @@ class AdminCustomersController < AdminController
       log self.class.name, LogEntry::INFORMATIONAL, "Klant #{@customer.name}, id #{@customer.id}, is aangemaakt door #{current_admin_user.username}"
       redirect_to admin_customers_path
     else
-      # aanmaken niet gelukt, toon formulier opniew (met foutmelding
+      # aanmaken niet gelukt, toon formulier opniew (met foutmelding)
       render :new
     end
   end

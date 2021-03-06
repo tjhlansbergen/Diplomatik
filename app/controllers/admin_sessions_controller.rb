@@ -28,7 +28,7 @@ class AdminSessionsController < AdminController
 
   # logt een beheerder uit door de sessie te clearen
   def admin_logout
-      session[:admin_user_id] = nil
-      redirect_to '/admin_login'
+    session[:admin_user_id] = nil
+    redirect_to '/admin_login'
   end
 end
