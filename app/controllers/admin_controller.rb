@@ -23,7 +23,7 @@ class AdminController < ActionController::Base
     redirect_to '/admin_login' unless admin_logged_in?
   end
 
-  # toont views/admin/overview.html.erb en maakt de benodigde models beschikbaar voor de view
+  # toont views/admin/overview.html.erb en maakt de benodigde waardes beschikbaar voor de view
   def overview
     @customer_count = Customer.select{ |customer| customer.deleted == false }.count
     @api_user_count = ApiUser.count

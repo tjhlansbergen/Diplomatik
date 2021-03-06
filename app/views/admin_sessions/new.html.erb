@@ -1,12 +1,18 @@
 <div class="form">
   <%= form_tag '/admin_login' do%>
-      <span>Gebruikersnaam:</span>
-      <%= text_field_tag :username%>
-      <span>Wachtwoord:</span>
-      <%= password_field_tag :password%>
+    <span>Gebruikersnaam:</span>
+    <%= text_field_tag :username%>
+    <span>Wachtwoord:</span>
+    <%= password_field_tag :password%>
 
-      <%= submit_tag "Inloggen" %>
+    <%= submit_tag "Inloggen" %>
   <%end%>
+  <h2 class="center">- of -</h2>  
+  <div>
+    <%= link_to Rails.configuration.oauth_url do %>
+      <%= image_tag "https://content.linkedin.com/content/dam/developer/global/en_US/site/img/signin-button.png", class: "center" %>
+  <% end %>
+  </div>
   <div class="error">
   <% flash.each do |name, msg| -%>
     <%= content_tag :div, msg, class: name %>

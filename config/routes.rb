@@ -16,4 +16,8 @@ Rails.application.routes.draw do
   get 'overview', to: 'admin#overview'
 
   root 'admin#overview'
+
+  # linkedin
+  get '/auth/linkedin/callback', to: 'oauth#callback', as: 'oauth_callback'
+  get '/auth/linkedin', to: 'oauth#failure', as: 'oauth_failure'
 end
