@@ -1,7 +1,7 @@
 # README
 
 ## Diplomatik-web
-Beheerwebsite, en API backend voor de Diplomatik-app. Gebouwd voor NOVI HBO ICT Software Development Praktijk IIII door Tako Lansbergen.
+Beheerwebsite, en API backend voor de Diplomatik-app. Gebouwd voor NOVI HBO ICT Software Development Praktijk IIII door Tako Lansbergen, studentnummer 800009968.
 
 - Ruby versie: 2.7.2
 - Rials versie: Rails 6.1.1
