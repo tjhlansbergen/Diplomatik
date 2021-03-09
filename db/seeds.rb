@@ -2,15 +2,6 @@
 # 
 # Dummy/mock data voor de database
 
-# admin_users = AdminUser.create([
-#     {username: "addy@novi.nl", password: "novi!0033"},
-#     {username: "bart@novi.nl", password: "novi!0033"},
-#     {username: "coen@novi.nl", password: "novi!0033"},
-#     {username: "dirk@novi.nl", password: "novi!0033"}])
-
-# api_user = ApiUser.create([
-#     {username: "alex@inholland.nl", password: "novi!0033", customer_id: 3, can_add_users: true}])
-
 # customers = Customer.create([
 #     {name: "Novi Hogeschool", deleted: false}])
 
