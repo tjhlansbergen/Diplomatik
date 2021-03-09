@@ -42,10 +42,10 @@
 #   {name: "Data Analyse met R", code: "DAR", customer_id: 2},
 # ])
 
-students = Student.create([
-  {name: "Arend Adelaar", student_number: "2021001", customer_id: 2},
-  {name: "Bert Beer", student_number: "2021002", customer_id: 2},
-  {name: "Coen Cieviet", student_number: "2021003", customer_id: 2},
-  {name: "Dirk Das", student_number: "2021004", customer_id: 2},
-  {name: "Elbert Eenhoorn", student_number: "2021005", customer_id: 2},
-])
+# students = Student.create([
+#   {name: "Arend Adelaar", student_number: "2021001", customer_id: 2},
+#   {name: "Bert Beer", student_number: "2021002", customer_id: 2},
+#   {name: "Coen Cieviet", student_number: "2021003", customer_id: 2},
+#   {name: "Dirk Das", student_number: "2021004", customer_id: 2},
+#   {name: "Elbert Eenhoorn", student_number: "2021005", customer_id: 2},
+# ])
